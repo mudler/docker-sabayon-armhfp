@@ -26,8 +26,9 @@ RUN rm -rf /etc/entropy/packages/license.accept
 RUN echo -5 | equo conf update
 
 # Perform post-upgrade tasks (mirror sorting, updating repository db)
-ADD ./scripts/setup.sh /setup.sh
-RUN /bin/bash /setup.sh  && rm -rf /setup.sh
+#ADD ./scripts/setup.sh /setup.sh
+#RUN /bin/bash /setup.sh  && rm -rf /setup.sh
+
 
 # Set environment variables.
 ENV HOME /root
