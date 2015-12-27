@@ -94,7 +94,7 @@ setup_users() {
 setup_boot
 setup_users
 rm -rfv /etc/fstab
-setup_bootfs_fstab "vfat"
+#setup_bootfs_fstab "vfat"
 setup_rootfs_fstab
 
 exit 0
