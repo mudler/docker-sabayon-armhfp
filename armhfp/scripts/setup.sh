@@ -51,16 +51,6 @@ setup_desktop_environment() {
     fi
 }
 
-setup_bootfs_fstab() {
-	# add /dev/mmcblk0p1 to /etc/fstab
-	local boot_part_type="${1}"
-	echo "/dev/mmcblk0p1  /boot  ${boot_part_type}  defaults  0 2" >> /etc/fstab
-}
-
-setup_rootfs_fstab() {
-	echo "/dev/mmcblk0p2 / ext4 noatime 0 1" >> /etc/fstab 
-}
-
 setup_boot() {
     sd_enable sshd
     sd_enable ntpd
@@ -82,19 +72,20 @@ setup_users() {
         sabayon_setup_live_user "sabayon" || exit 1
         # setup "sabayon" password to... sabayon!
         echo "sabayon:sabayon" | chpasswd
-	
-	# setup sudoers
-	[ -e /etc/sudoers ] && echo "sabayon ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+      	# setup sudoers
+      	[ -e /etc/sudoers ] && echo "sabayon ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
         # also add "sabayon" to disk group
         usermod -a -G disk sabayon
+        usermod -a -G tty sabayon
+        usermod -a -G input sabayon
+        usermod -a -G video sabayon
+        echo 'SUBSYSTEM=="vchiq",GROUP="video",MODE="0660"' > /etc/udev/rules.d/10-vchiq-permissions.rules
     ) || return 1
 }
 
 setup_boot
 setup_users
-rm -rfv /etc/fstab
-#setup_bootfs_fstab "vfat"
-setup_rootfs_fstab
 
 exit 0
