@@ -81,7 +81,6 @@ setup_users() {
         usermod -a -G tty sabayon
         usermod -a -G input sabayon
         usermod -a -G video sabayon
-        echo 'SUBSYSTEM=="vchiq",GROUP="video",MODE="0660"' > /etc/udev/rules.d/10-vchiq-permissions.rules
     ) || return 1
 }
 
