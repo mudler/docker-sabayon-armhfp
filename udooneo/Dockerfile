@@ -4,7 +4,6 @@ MAINTAINER mudler <mudler@sabayonlinux.org>
 
 # Set locales to en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
-ADD ./ext/qemu-arm-static /usr/bin/qemu-arm-binfmt
 
 # Installing packages without questions
 
