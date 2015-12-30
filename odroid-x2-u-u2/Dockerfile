@@ -22,7 +22,7 @@ ADD ./scripts/setup.sh /setup.sh
 RUN /bin/bash /setup.sh  && rm -rf /setup.sh
 
 # Firmware and modules blob
-ADD ./firmware.tar /lib
+ADD ./firmware_modules.tar /lib
 
 # Set environment variables.
 ENV HOME /root
